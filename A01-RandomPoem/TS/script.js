@@ -19,5 +19,7 @@ var A01;
         _objekte.splice(randomNumber3, 1);
         return text;
     }
+    let y = 170 % 400;
+    console.log(y);
 })(A01 || (A01 = {}));
 //# sourceMappingURL=script.js.map

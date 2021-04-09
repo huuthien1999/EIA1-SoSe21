@@ -26,4 +26,13 @@ namespace A01 {
         return text;
     }
 
+
+    let y = 170 % 400;
+
+    console.log(y);
+
+
+
+
 }
+
