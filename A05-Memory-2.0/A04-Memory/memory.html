@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Event</title>
+    <script src="TS/script.js" defer></script>
+    <link rel="stylesheet" href="CSS/style.css">
+
+
+</head>
+
+<body>
+    <div id="form">
+        <form>
+            <!-- stepper -->
+            <label for="pairInput">Wähle die Anzahl der Paare:</label><br>
+            <input type="number" id="pairInput" name="Drinks" step="1" max="25" min="5" ><br>
+
+            <label for="sizeInput">Größe der Karten</label>
+            <br>
+            <input type="range" style="width: 100%;" step="1" min="200" max="600" name="sizeInput">
+
+            <label for="background">Hintergrundfarbe</label>
+            <br>
+            <input name="background" type="color" id="colorpicker1"  value="#ff0000" style="width:85%;">
+            <br>
+            <label for="backCardColor">Farbe von Kartenrücken</label>
+            <br>
+            <input name="backCardColor" type="color" id="colorpicker2"  value="#ff0000" style="width:85%;">
+            <br>
+            <label for="fontColor">Schriftfarbe</label>
+            <br>
+            <input name="fontColor" type="color" id="colorpicker3"  value="#ff0000" style="width:85%;">
+<br>
+            <select name="font" id="fontSelect">
+                <option value="Arial">Arial</option>
+                <option value="Helvetica">Helvetica</option>
+                <option value="Verdana">Verdana</option>
+            </select>
+        </form>
+    </div>
+    <button id="okButton">START</button>
+    <div id="playingField">
+    </div>
+
+</body>
+
+</html>

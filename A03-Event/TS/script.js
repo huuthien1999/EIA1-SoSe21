@@ -19,23 +19,23 @@ var Events;
         let mouseX = _event.clientX; // Gets Mouse X
         let mouseY = _event.clientY; // Gets Mouse Y
         // let coor: string = "X coords: " + mouseX + ", Y coords: " + mouseY;
-        // let targetDOM: EventTarget = <EventTarget>_event.target;
+        let targetDOM = _event.target;
         // spanDOMElement.innerHTML = coor + "<br>" + targetDOM;
         // spanDOMElement.style.left = mouseX + 20 + "px";
         // spanDOMElement.style.top = mouseY + "px";
     }
     function logInfo(_event) {
-        // console.log(_event.type);
+        console.log(_event);
         // console.log(_event.target);
         // console.log(_event.currentTarget);
         // console.log(_event.composedPath());
         // console.log(_event.target);
         // console.log(_event.target);
-        let newValue = _event.target;
-        // console.log(newValue);
-        let newValue2 = newValue.querySelector("p").innerHTML;
-        console.log(newValue2);
-        newValue.style.backgroundColor = "#204474";
+        // let newValue: HTMLElement = <HTMLElement> _event.target;
+        // // console.log(newValue);
+        // let newValue2: string = <string> newValue.querySelector("p").innerHTML;
+        // console.log(newValue2);
+        // newValue.style.backgroundColor = "#204474";
     }
 })(Events || (Events = {}));
 //# sourceMappingURL=script.js.map
