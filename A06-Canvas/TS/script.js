@@ -23,7 +23,7 @@ var Canvas;
         canvas.classList.remove("hidden");
         buttonDOM2.classList.add("hidden");
         buttonDOM3.classList.add("hidden");
-        let color = ["red", "blue", "green", "yellow"];
+        // let color: string[] = ["red", "blue", "green", "yellow"];
         let x1 = 50;
         let y1 = 50;
         let x1Intervall = canvas.width - 50;

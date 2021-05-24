@@ -1,16 +1,12 @@
 "use strict";
 var Bienen;
 (function (Bienen) {
-    function test() {
-        console.log("test");
-    }
-    Bienen.test = test;
     class Flowers {
-        constructor(_flowerType, _xPos) {
-            this.yRandomMin = 50 + (Bienen.crc2.canvas.height * Bienen.golden);
-            this.yRandomMax = Bienen.crc2.canvas.height * 0.9;
+        constructor(_flowerType, _xPos, _yRandomMin, _yRandomMax) {
             this.xPos = _xPos;
             this.flowerType = _flowerType;
+            this.yRandomMax = _yRandomMax;
+            this.yRandomMin = _yRandomMin;
             this.draw();
         }
         draw() {

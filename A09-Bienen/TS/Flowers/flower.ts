@@ -1,22 +1,17 @@
 namespace Bienen {
-
-    export function test(): void {
-        console.log("test");
-    }
-
-
     export class Flowers {
         xPos: number;
         flowerType: number;
-        
 
-        yRandomMin: number = 50 + (crc2.canvas.height * golden);
-        yRandomMax: number = crc2.canvas.height * 0.9;
+        yRandomMin: number;
+        yRandomMax: number;
 
-        constructor(_flowerType: number, _xPos: number) {
+        constructor(_flowerType: number, _xPos: number, _yRandomMin: number, _yRandomMax: number) {
             this.xPos = _xPos;
             this.flowerType = _flowerType;
 
+            this.yRandomMax = _yRandomMax;
+            this.yRandomMin = _yRandomMin;
             this.draw();
         }
 
@@ -64,5 +59,4 @@ namespace Bienen {
             }
         }
     }
-
 }

@@ -1,25 +1,20 @@
 namespace Bienen {
 
-    export class Biene {
+    export class Bees {
         posX: number;
         posY: number;
+        velocityX: number;
+        velocityY: number;
         randomScale: number;
-
         randomNumber: number = (Math.floor(Math.random() * 2000) + 1000);
         counter: number = 0;
 
-        velocityX: number;
-        velocityY: number;
-
-        constructor(_posX: number, _posY: number, _velocityX: number, _velocityY: number, _randomScale: number) {
-            this.posX = _posX;
-            this.posY = _posY;
+        constructor( _position: Vector, _velocity: Vector, _randomScale: number) {
+            this.posX = _position.x;
+            this.posY = _position.y;
             this.randomScale = _randomScale;
-
-            this.velocityX = _velocityX;
-            this.velocityY = _velocityY;
-            console.log(this.randomNumber);
-            // this.draw();
+            this.velocityX = _velocity.x;
+            this.velocityY = _velocity.y;
         }
 
         draw(): void {
@@ -60,7 +55,6 @@ namespace Bienen {
         }
 
         update(): void {
-            console.log("test");
 
             if (this.posX > crc2.canvas.width || this.posX < 0) {
                 this.velocityX = -this.velocityX;
@@ -70,7 +64,7 @@ namespace Bienen {
                 this.velocityY = -this.velocityY;
             }
 
-            if (this.counter == this.randomNumber || this.counter == this.randomNumber) {
+            if (this.counter == this.randomNumber) {
                 this.velocityX = -this.velocityX;
                 this.velocityY = -this.velocityY;
                 this.counter = 0;

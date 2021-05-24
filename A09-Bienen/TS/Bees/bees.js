@@ -1,17 +1,15 @@
 "use strict";
 var Bienen;
 (function (Bienen) {
-    class Biene {
-        constructor(_posX, _posY, _velocityX, _velocityY, _randomScale) {
+    class Bees {
+        constructor(_position, _velocity, _randomScale) {
             this.randomNumber = (Math.floor(Math.random() * 2000) + 1000);
             this.counter = 0;
-            this.posX = _posX;
-            this.posY = _posY;
+            this.posX = _position.x;
+            this.posY = _position.y;
             this.randomScale = _randomScale;
-            this.velocityX = _velocityX;
-            this.velocityY = _velocityY;
-            console.log(this.randomNumber);
-            // this.draw();
+            this.velocityX = _velocity.x;
+            this.velocityY = _velocity.y;
         }
         draw() {
             Bienen.crc2.save();
@@ -45,14 +43,13 @@ var Bienen;
             Bienen.crc2.restore();
         }
         update() {
-            console.log("test");
             if (this.posX > Bienen.crc2.canvas.width || this.posX < 0) {
                 this.velocityX = -this.velocityX;
             }
             if (this.posY > Bienen.crc2.canvas.height || this.posY < Bienen.crc2.canvas.height * 0.40) {
                 this.velocityY = -this.velocityY;
             }
-            if (this.counter == this.randomNumber || this.counter == this.randomNumber) {
+            if (this.counter == this.randomNumber) {
                 this.velocityX = -this.velocityX;
                 this.velocityY = -this.velocityY;
                 this.counter = 0;
@@ -64,6 +61,6 @@ var Bienen;
             this.draw();
         }
     }
-    Bienen.Biene = Biene;
+    Bienen.Bees = Bees;
 })(Bienen || (Bienen = {}));
 //# sourceMappingURL=bees.js.map

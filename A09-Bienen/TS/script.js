@@ -17,7 +17,6 @@ var Blumenwiese;
         drawTree(0, 15, 50, 20, 50);
         cornFlower(20, 10, 50, 50 + (crc2.canvas.height * golden), crc2.canvas.height * 0.9);
         tulip(crc2.canvas.width * 0.6, 10, 50, 50 + (crc2.canvas.height * golden), crc2.canvas.height * 0.9);
-        test();
     }
     function drawBackground() {
         let gradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);

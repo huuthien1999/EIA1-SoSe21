@@ -24,7 +24,7 @@ namespace Canvas {
         canvas.classList.remove("hidden");
         buttonDOM2.classList.add("hidden");
         buttonDOM3.classList.add("hidden");
-        let color: string[] = ["red", "blue", "green", "yellow"];
+        // let color: string[] = ["red", "blue", "green", "yellow"];
         let x1: number = 50;
         let y1: number = 50;
 

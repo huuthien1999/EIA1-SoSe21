@@ -1,11 +1,12 @@
 "use strict";
 var Bienen;
 (function (Bienen) {
-    window.addEventListener("load", handleLoad);
     Bienen.golden = 0.62;
     let bienen = [];
     let flowers = [];
+    let clouds = [];
     let imageData;
+    window.addEventListener("load", handleLoad);
     function handleLoad() {
         let canvas = document.querySelector("canvas");
         Bienen.crc2 = canvas.getContext("2d");
@@ -14,23 +15,22 @@ var Bienen;
         createBees(10);
         createBackground();
         createFlowers();
+        createCloud();
         imageData = Bienen.crc2.getImageData(0, 0, canvas.width, canvas.height);
         animate();
-        // window.setInterval(animate, 20);
     }
     function createBackground() {
         Bienen.drawBackground();
-        let sunPos = new Bienen.Vector(Bienen.crc2.canvas.width / 2, Bienen.crc2.canvas.height * 0.15);
-        Bienen.drawSun(sunPos);
-        let mountainPos = new Bienen.Vector(0, Bienen.crc2.canvas.height * 0.62);
-        Bienen.drawMountains(mountainPos, 200, 300, "grey");
-        Bienen.drawMountains(mountainPos, 150, 200, "lightgrey");
+        Bienen.drawSun({ x: Bienen.crc2.canvas.width / 2, y: Bienen.crc2.canvas.height * 0.15 });
+        Bienen.drawMountains({ x: 0, y: Bienen.crc2.canvas.height * Bienen.golden }, 200, 300, "grey");
+        Bienen.drawMountains({ x: 0, y: Bienen.crc2.canvas.height * Bienen.golden }, 150, 200, "lightgrey");
         Bienen.drawTree(0, 15, 50, 20, 50);
+        Bienen.drawBeeHive();
     }
     function createFlowers() {
         let xPos = 0;
         do {
-            flowers.push(new Bienen.Flowers(Math.floor(Math.random() * 2) + 1, xPos));
+            flowers.push(new Bienen.Flowers(Math.floor(Math.random() * 2) + 1, xPos, 50 + (Bienen.crc2.canvas.height * Bienen.golden), Bienen.crc2.canvas.height * 0.9));
             xPos += 10 + Math.random() * (50 - 10);
         } while (xPos < Bienen.crc2.canvas.width);
     }
@@ -39,8 +39,12 @@ var Bienen;
             let randomScale = 0.5 + Math.random() * (2.5 - 1.3);
             let randomVelocityX = (Math.random() - 0.5) * 5;
             let randomVelocityY = (Math.random() - 0.5) * 5;
-            bienen.push(new Bienen.Biene(500, 500, randomVelocityX, randomVelocityY, randomScale));
+            bienen.push(new Bienen.Bees({ x: Bienen.crc2.canvas.width / 2, y: Bienen.crc2.canvas.height * Bienen.golden }, { x: randomVelocityX, y: randomVelocityY }, randomScale));
         }
+    }
+    function createCloud() {
+        clouds.push(new Bienen.Cloud({ x: Bienen.crc2.canvas.width * .10, y: Bienen.crc2.canvas.height * .10 }));
+        clouds.push(new Bienen.Cloud({ x: Bienen.crc2.canvas.width * .5, y: Bienen.crc2.canvas.height * .05 }));
     }
     function animate() {
         requestAnimationFrame(animate);
@@ -48,6 +52,9 @@ var Bienen;
         Bienen.crc2.putImageData(imageData, 0, 0);
         for (let index = 0; index < bienen.length; index++) {
             bienen[index].update();
+        }
+        for (let index = 0; index < clouds.length; index++) {
+            clouds[index].update();
         }
     }
 })(Bienen || (Bienen = {}));
