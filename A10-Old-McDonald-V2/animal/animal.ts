@@ -35,10 +35,10 @@ namespace Farm {
 
 
     export class Cow extends Animal {
-        produceMilk: string;
+        ability: string = "big";
 
-        milkinTheCow(): void {
-            console.log("I " + this.ability);
+        produceMilk(): void {
+            console.log("I produce milk");
         }
 
     }
@@ -46,7 +46,7 @@ namespace Farm {
     export class Chicken extends Animal {
         ability: string = " produce milk";
 
-        layFuckingEggs(): void {
+        layEggs(): void {
             console.log("I " + this.ability);
         }
 
@@ -55,7 +55,7 @@ namespace Farm {
     export class Pig extends Animal {
         ability: string = " produce milk";
 
-        HITONTHEFLOOR(): void {
+        eatDirt(): void {
             console.log("I " + this.ability);
         }
 
@@ -64,17 +64,17 @@ namespace Farm {
     export class Horse extends Animal {
         ability: string = " produce milk";
 
-        KICKSomeOneinTHENUTS(): void {
+        jumpHigh(): void {
             console.log("jo ich geh mal reiten");
         }
 
     }
 
     export class Sheep extends Animal {
-        ability: string = " produce milk";
+        ability: string = "";
 
-        möhhhh(): void {
-            console.log("JUNGE WAS GEHT HIER EIG: ");
+        produceWool(): void {
+            console.log(" I'm producing wool ");
         }
 
     }

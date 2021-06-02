@@ -39,7 +39,7 @@ var Farm;
         let dayCounter = document.querySelector("#dayCounter");
         cow.eat(50, 0);
         cow.sing(50);
-        cow.doSpecialAction();
+        cow.produceMilk();
         setTimeout(function () {
             chicken.eat(2, 1);
             chicken.sing(2);

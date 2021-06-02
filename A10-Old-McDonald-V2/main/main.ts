@@ -54,7 +54,7 @@ console.log
 
         cow.eat(50, 0);
         cow.sing(50);
-        cow.doSpecialAction();
+        cow.produceMilk();
 
         setTimeout(function (): void {
             chicken.eat(2, 1);

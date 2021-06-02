@@ -23,8 +23,12 @@ var Farm;
     }
     Farm.Animal = Animal;
     class Cow extends Animal {
-        milkinTheCow() {
-            console.log("I " + this.ability);
+        constructor() {
+            super(...arguments);
+            this.ability = "big";
+        }
+        produceMilk() {
+            console.log("I produce milk");
         }
     }
     Farm.Cow = Cow;
@@ -33,7 +37,7 @@ var Farm;
             super(...arguments);
             this.ability = " produce milk";
         }
-        layFuckingEggs() {
+        layEggs() {
             console.log("I " + this.ability);
         }
     }
@@ -43,7 +47,7 @@ var Farm;
             super(...arguments);
             this.ability = " produce milk";
         }
-        HITONTHEFLOOR() {
+        eatDirt() {
             console.log("I " + this.ability);
         }
     }
@@ -53,7 +57,7 @@ var Farm;
             super(...arguments);
             this.ability = " produce milk";
         }
-        KICKSomeOneinTHENUTS() {
+        jumpHigh() {
             console.log("jo ich geh mal reiten");
         }
     }
@@ -61,10 +65,10 @@ var Farm;
     class Sheep extends Animal {
         constructor() {
             super(...arguments);
-            this.ability = " produce milk";
+            this.ability = "";
         }
-        möhhhh() {
-            console.log("JUNGE WAS GEHT HIER EIG: ");
+        produceWool() {
+            console.log(" I'm producing wool ");
         }
     }
     Farm.Sheep = Sheep;
