@@ -50,7 +50,6 @@ namespace Bienen {
         }
 
         
-        
     }
 
     function createCloud (): void {
