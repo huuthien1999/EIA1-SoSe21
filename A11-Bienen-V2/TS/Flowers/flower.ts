@@ -43,7 +43,7 @@ namespace Wiese {
                 crc2.closePath();
                 crc2.fillStyle = "blue";
                 crc2.fill();
-            }
+            }       
             crc2.restore();
         }
 
