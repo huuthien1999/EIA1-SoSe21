@@ -1,5 +1,5 @@
-namespace FlowersV2 {
-    
+namespace Wiese  {
+
     export class Cloud extends Movable {
 
         constructor(_position: Vector, _velocity: Vector) {

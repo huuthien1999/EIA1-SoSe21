@@ -1,4 +1,4 @@
-namespace FlowersV2 {
+namespace Wiese  {
 
     export interface Vector {
         x: number;

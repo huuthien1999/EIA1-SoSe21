@@ -1,11 +1,11 @@
-namespace FlowersV2 {
+namespace Wiese {
 
     window.addEventListener("load", handleLoad);
-    
+
     export let crc2: CanvasRenderingContext2D;
     export let golden: number = 0.62;
     let movables: Movable[] = [];
-    let flowers: Flowers[] = [];
+    let flowers: Flower[] = [];
     // let clouds: Cloud[] = [];
     let imageData: ImageData;
 
@@ -35,8 +35,17 @@ namespace FlowersV2 {
 
     function createFlowers(): void {
         let xPos: number = 0;
+        
         do {
-            flowers.push(new Flowers(Math.floor(Math.random() * 2) + 1, xPos, 50 + (crc2.canvas.height * golden), crc2.canvas.height * 0.9));
+            let flowerType: number = Math.floor(Math.random() * 2) + 1;
+
+            if (flowerType == 1) {
+                flowers.push(new Tulip(xPos, 50 + (crc2.canvas.height * golden), crc2.canvas.height * 0.9));
+            }
+            else {
+                flowers.push(new CornFlower(xPos, 50 + (crc2.canvas.height * golden), crc2.canvas.height * 0.9));
+            }
+            
             xPos += 10 + Math.random() * (50 - 10);
         }
         while (xPos < crc2.canvas.width);
@@ -47,13 +56,13 @@ namespace FlowersV2 {
             let randomScale: number = 0.5 + Math.random() * (2.5 - 1.3);
             let randomVelocityX: number = (Math.random() - 0.5) * 5;
             let randomVelocityY: number = (Math.random() - 0.5) * 5;
-            movables.push(new Bee({ x: crc2.canvas.width / 2, y: crc2.canvas.height * golden }, { x: randomVelocityX, y: randomVelocityY }, randomScale));
+            movables.push(<Movable> new Bee({ x: crc2.canvas.width / 2, y: crc2.canvas.height * golden }, { x: randomVelocityX, y: randomVelocityY }, randomScale));
         }
     }
 
     function createCloud (): void {
-        movables.push(new Cloud({ x: crc2.canvas.width * .10, y: crc2.canvas.height * .10 }, { x: 0.5, y:  0.1}));
-        movables.push(new Cloud({ x: crc2.canvas.width * .5, y: crc2.canvas.height * .05 }, { x: 0.5, y:  0.1}));
+        movables.push(<Movable> new Cloud({ x: crc2.canvas.width * .10, y: crc2.canvas.height * .10 }, { x: 0.5, y:  0.1}));
+        movables.push(<Movable> new Cloud({ x: crc2.canvas.width * .5, y: crc2.canvas.height * .05 }, { x: 0.5, y:  0.1}));
     }
 
     function animate(): void {
@@ -68,18 +77,6 @@ namespace FlowersV2 {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     class Hund {
         name: string = "test";
         vorname: string = "blub";
@@ -88,7 +85,6 @@ namespace FlowersV2 {
             this.name = _name;
             this.vorname = _vorname;
         }
-
 
         ichSeheEinSchaf(): void {
             console.log("wau wau " + this.name + this.vorname); 
@@ -110,9 +106,9 @@ namespace FlowersV2 {
 
     class Bulldogge extends Hund {
 
-        // constructor(_name: string, _vorname: string) {
-        //     super(_name, _vorname);
-        // }
+        constructor(_name: string, _vorname: string) {
+            super(_name, _vorname);
+        }
 
         ichSeheEinSchaf(): void {
             console.log("wau wau ich baller die WEG AMK " + this.name + this.vorname); 
@@ -140,16 +136,4 @@ namespace FlowersV2 {
     // let hund3: Hund = new Bulldogge("Ging", "Freeces");
 
     // hund3.ichSeheEinSchaf();
-
-
-
-
-
-
-
-
-
-
-
-
 }

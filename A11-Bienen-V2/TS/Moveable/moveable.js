@@ -1,6 +1,6 @@
 "use strict";
-var FlowersV2;
-(function (FlowersV2) {
+var Wiese;
+(function (Wiese) {
     class Movable {
         constructor(_position, _velocity) {
             this.posX = _position.x;
@@ -15,6 +15,6 @@ var FlowersV2;
             //Update
         }
     }
-    FlowersV2.Movable = Movable;
-})(FlowersV2 || (FlowersV2 = {}));
+    Wiese.Movable = Movable;
+})(Wiese || (Wiese = {}));
 //# sourceMappingURL=moveable.js.map

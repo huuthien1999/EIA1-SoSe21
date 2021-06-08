@@ -1,4 +1,4 @@
-namespace FlowersV2 {
+namespace Wiese {
     
 export class Movable {
     posX: number;
@@ -23,8 +23,5 @@ export class Movable {
         //Update
     }
 }
-
-
-
 
 }

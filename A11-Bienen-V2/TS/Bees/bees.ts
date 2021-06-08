@@ -1,4 +1,4 @@
-namespace FlowersV2 {
+namespace Wiese {
 
     export class Bee extends Movable {
 
