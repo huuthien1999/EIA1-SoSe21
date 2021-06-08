@@ -61,42 +61,5 @@ var Wiese;
             movables[index].draw();
         }
     }
-    class Hund {
-        constructor(_name, _vorname) {
-            this.name = "test";
-            this.vorname = "blub";
-            this.name = _name;
-            this.vorname = _vorname;
-        }
-        ichSeheEinSchaf() {
-            console.log("wau wau " + this.name + this.vorname);
-        }
-    }
-    class Pudel extends Hund {
-        constructor(_name, _vorname) {
-            super(_name, _vorname);
-        }
-        ichSeheEinSchaf() {
-            console.log("wau wau ich belle wie ein kind " + this.name + this.vorname);
-        }
-    }
-    class Bulldogge extends Hund {
-        constructor(_name, _vorname) {
-            super(_name, _vorname);
-        }
-        ichSeheEinSchaf() {
-            console.log("wau wau ich baller die WEG AMK " + this.name + this.vorname);
-        }
-    }
-    let hund1 = new Hund("killua", "zoldyck");
-    hund1.ichSeheEinSchaf();
-    let hund2 = new Pudel("Gon", "Freeces");
-    hund2.ichSeheEinSchaf();
-    let hund3 = new Bulldogge("Ging", "Freeces");
-    hund3.ichSeheEinSchaf();
-    // let hund2: Hund = new Pudel("Gon", "Freeces");
-    // hund2.ichSeheEinSchaf();
-    // let hund3: Hund = new Bulldogge("Ging", "Freeces");
-    // hund3.ichSeheEinSchaf();
 })(Wiese || (Wiese = {}));
 //# sourceMappingURL=main.js.map
