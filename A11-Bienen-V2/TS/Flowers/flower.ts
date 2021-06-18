@@ -19,9 +19,9 @@ namespace Wiese {
 
     export class Tulip extends Flower {
 
-        constructor(_xPos: number, _yRandomMin: number, _yRandomMax: number) {
-            super(_xPos, _yRandomMin, _yRandomMax);
-        }
+        // constructor(_xPos: number, _yRandomMin: number, _yRandomMax: number) {
+        //     super(_xPos, _yRandomMin, _yRandomMax);
+        // }
 
         draw(): void {
             let randomScale: number = 0.5 + Math.random() * (0.8 - 0.5);
@@ -52,9 +52,9 @@ namespace Wiese {
 
     export class CornFlower extends Flower {
 
-        constructor(_xPos: number, _yRandomMin: number, _yRandomMax: number) {
-            super(_xPos, _yRandomMin, _yRandomMax);
-        }
+        // constructor(_xPos: number, _yRandomMin: number, _yRandomMax: number) {
+        //     super(_xPos, _yRandomMin, _yRandomMax);
+        // }
 
         draw(): void {
             let randomScale: number = 0.5 + Math.random() * (0.8 - 0.5);

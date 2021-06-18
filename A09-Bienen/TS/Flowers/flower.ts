@@ -2,7 +2,7 @@ namespace Bienen {
     export class Flowers {
         xPos: number;
         flowerType: number;
-
+       
         yRandomMin: number;
         yRandomMax: number;
 
@@ -59,4 +59,65 @@ namespace Bienen {
             }
         }
     }
+
+
+
+
+
+
+
+    }
+    class Hund{
+        name: string;
+  
+        constructor(_name: string){
+            this.name = _name;
+        }
+        
+        wuff(){
+            //
+        };
+    }
+
+    class Pudel extends Hund{
+
+        wuff(){
+            console.log("Wau Wau, Pudel");
+        }
+
+        ichPisseDichAn(){
+            console.log("pissen");
+        }
+    }
+
+    class Bulldoge extends Hund{
+
+        bellart: string;
+        
+        constructor(_name: string, _bellen: string) {
+            super(_name);
+            this.bellart = _bellen;
+        }
+
+        wuff() {
+            console.log("Wau Wau");
+        }
+
+        ichBelleLaut(){
+            console.log("wau wau" + this.bellart);
+        }
+    }
+
+    let hund: Bulldoge [] = [];
+
+  
+
+    let hund1: Hund = new Bulldoge("Lisa", "Laut");
+    hund1.wuff();
+   
+
+    
+
+    // hund1.ichPisseDichAn();
+
 }

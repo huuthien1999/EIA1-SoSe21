@@ -31,6 +31,9 @@ var Farm;
         farmDay();
     }
     class Animal {
+        name;
+        breed;
+        sound;
         constructor(_name, _breed, _sound) {
             this.name = _name;
             this.breed = _breed;

@@ -2,6 +2,10 @@
 var Bienen;
 (function (Bienen) {
     class Flowers {
+        xPos;
+        flowerType;
+        yRandomMin;
+        yRandomMax;
         constructor(_flowerType, _xPos, _yRandomMin, _yRandomMax) {
             this.xPos = _xPos;
             this.flowerType = _flowerType;
@@ -52,4 +56,38 @@ var Bienen;
     }
     Bienen.Flowers = Flowers;
 })(Bienen || (Bienen = {}));
+class Hund {
+    name;
+    constructor(_name) {
+        this.name = _name;
+    }
+    wuff() {
+        //
+    }
+    ;
+}
+class Pudel extends Hund {
+    wuff() {
+        console.log("Wau Wau, Pudel");
+    }
+    ichPisseDichAn() {
+        console.log("pissen");
+    }
+}
+class Bulldoge extends Hund {
+    bellart;
+    constructor(_name, _bellen) {
+        super(_name);
+        this.bellart = _bellen;
+    }
+    wuff() {
+        console.log("Wau Wau");
+    }
+    ichBelleLaut() {
+        console.log("wau wau" + this.bellart);
+    }
+}
+let hund = [];
+let hund1 = new Bulldoge("Lisa", "Laut");
+hund1.wuff();
 //# sourceMappingURL=flower.js.map

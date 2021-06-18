@@ -2,10 +2,12 @@
 var Wiese;
 (function (Wiese) {
     class Bee extends Wiese.Movable {
+        randomScale;
+        randomNumber = (Math.floor(Math.random() * 2000) + 1000);
+        counter = 0;
         constructor(_position, _velocity, _randomScale) {
             super(_position, _velocity);
-            this.randomNumber = (Math.floor(Math.random() * 2000) + 1000);
-            this.counter = 0;
+            this.randomScale = _randomScale;
         }
         draw() {
             Wiese.crc2.save();

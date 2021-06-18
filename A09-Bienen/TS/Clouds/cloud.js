@@ -2,9 +2,11 @@
 var Bienen;
 (function (Bienen) {
     class Cloud {
+        posX;
+        posY;
+        velocityX = 0.5;
+        velocityY = 0.1;
         constructor(_position) {
-            this.velocityX = 0.5;
-            this.velocityY = 0.1;
             this.posY = _position.y;
             this.posX = _position.x;
         }

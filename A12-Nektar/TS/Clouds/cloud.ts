@@ -1,16 +1,12 @@
-namespace Bienen {
-    export class Cloud {
-        posX: number;
-        posY: number; 
-        velocityX: number = 0.5;
-        velocityY: number = 0.1;
+namespace Nektar  {
 
-        constructor(_position: Vector) {
-            this.posY = _position.y;
-            this.posX = _position.x;
+    export class Cloud extends Movable {
+
+        constructor(_position: Vector, _velocity: Vector) {
+            super(_position, _velocity);
         }
 
-        draw(): void {
+        public draw(): void {
 
             crc2.save();
             crc2.translate(this.posX, this.posY);
@@ -33,7 +29,7 @@ namespace Bienen {
             crc2.restore();
         }
 
-        update(): void {
+        public update(): void {
            
             if (this.posX > crc2.canvas.width || this.posX < 0) {
                 this.velocityX = -this.velocityX;
@@ -45,8 +41,6 @@ namespace Bienen {
 
             this.posX += this.velocityX;
             this.posY += this.velocityY;
-            
-            this.draw();
         }
     }
 }

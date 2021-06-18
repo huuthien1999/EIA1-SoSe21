@@ -2,6 +2,9 @@
 var Farm;
 (function (Farm) {
     class Animal {
+        name;
+        breed;
+        sound;
         constructor(_name, _breed, _sound) {
             this.name = _name;
             this.breed = _breed;
@@ -23,50 +26,35 @@ var Farm;
     }
     Farm.Animal = Animal;
     class Cow extends Animal {
-        constructor() {
-            super(...arguments);
-            this.ability = "big";
-        }
+        ability = "big";
         produceMilk() {
             console.log("I produce milk");
         }
     }
     Farm.Cow = Cow;
     class Chicken extends Animal {
-        constructor() {
-            super(...arguments);
-            this.ability = " produce milk";
-        }
+        ability = " produce milk";
         layEggs() {
             console.log("I " + this.ability);
         }
     }
     Farm.Chicken = Chicken;
     class Pig extends Animal {
-        constructor() {
-            super(...arguments);
-            this.ability = " produce milk";
-        }
+        ability = " produce milk";
         eatDirt() {
             console.log("I " + this.ability);
         }
     }
     Farm.Pig = Pig;
     class Horse extends Animal {
-        constructor() {
-            super(...arguments);
-            this.ability = " produce milk";
-        }
+        ability = " produce milk";
         jumpHigh() {
             console.log("jo ich geh mal reiten");
         }
     }
     Farm.Horse = Horse;
     class Sheep extends Animal {
-        constructor() {
-            super(...arguments);
-            this.ability = "";
-        }
+        ability = "";
         produceWool() {
             console.log(" I'm producing wool ");
         }

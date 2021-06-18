@@ -2,6 +2,9 @@
 var Wiese;
 (function (Wiese) {
     class Flower {
+        xPos;
+        yRandomMin;
+        yRandomMax;
         constructor(_xPos, _yRandomMin, _yRandomMax) {
             this.xPos = _xPos;
             this.yRandomMax = _yRandomMax;
@@ -14,9 +17,9 @@ var Wiese;
     }
     Wiese.Flower = Flower;
     class Tulip extends Flower {
-        constructor(_xPos, _yRandomMin, _yRandomMax) {
-            super(_xPos, _yRandomMin, _yRandomMax);
-        }
+        // constructor(_xPos: number, _yRandomMin: number, _yRandomMax: number) {
+        //     super(_xPos, _yRandomMin, _yRandomMax);
+        // }
         draw() {
             let randomScale = 0.5 + Math.random() * (0.8 - 0.5);
             let y = this.yRandomMin + Math.random() * (this.yRandomMax - this.yRandomMin);
@@ -43,9 +46,9 @@ var Wiese;
     }
     Wiese.Tulip = Tulip;
     class CornFlower extends Flower {
-        constructor(_xPos, _yRandomMin, _yRandomMax) {
-            super(_xPos, _yRandomMin, _yRandomMax);
-        }
+        // constructor(_xPos: number, _yRandomMin: number, _yRandomMax: number) {
+        //     super(_xPos, _yRandomMin, _yRandomMax);
+        // }
         draw() {
             let randomScale = 0.5 + Math.random() * (0.8 - 0.5);
             let y = this.yRandomMin + Math.random() * (this.yRandomMax - this.yRandomMin);
