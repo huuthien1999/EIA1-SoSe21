@@ -2,9 +2,9 @@
 var Nektar;
 (function (Nektar) {
     class Cloud extends Nektar.Movable {
-        constructor(_position, _velocity) {
-            super(_position, _velocity);
-        }
+        // constructor(_position: Vector, _velocity: Vector) {
+        //     super(_position, _velocity);
+        // }
         draw() {
             Nektar.crc2.save();
             Nektar.crc2.translate(this.posX, this.posY);

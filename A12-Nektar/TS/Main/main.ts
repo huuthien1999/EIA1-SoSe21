@@ -4,8 +4,16 @@ namespace Nektar {
 
     export let crc2: CanvasRenderingContext2D;
     export let golden: number = 0.62;
+    export enum Jobs {
+        flyToFlower,
+        drinkNectar,
+        flyBack,
+        storeNectar,
+        flyAround
+    }
+
     let movables: Movable[] = [];
-    let flowers: Flower[] = [];
+    export let flowers: Flower[] = [];
     // let clouds: Cloud[] = [];
     let imageData: ImageData;
 
@@ -80,7 +88,5 @@ namespace Nektar {
             movables[index].update();
             movables[index].draw();
         }
-
-       
     }
 }

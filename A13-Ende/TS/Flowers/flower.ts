@@ -1,12 +1,12 @@
-namespace Nektar {
+namespace End {
     export abstract class Flower {
+        protected beeAssign: boolean = false;
         protected xPos: number;
         protected yPos: number;
         protected yRandomMin: number;
         protected yRandomMax: number;
+        protected counter: number = 0;
         protected nectarValue: number = Math.floor(Math.random() * 2000) + 1000;
-        protected nectarCounter: number = 0;
-        
         protected randomScale: number = 0.5 + Math.random() * (0.8 - 0.5);
         protected nectarLength: number = 1;
 
@@ -17,24 +17,25 @@ namespace Nektar {
             this.draw();
         }
 
-        // get positionFlower(): Vector {
-        //     let position: Vector = {x: this.xPos, y: this.yPos};
-        //     return position;
-        // }
-        get xpositionFlower(): number {
-            return this.xPos;
-        }
-
-        get ypositionFlower(): number {
-            return this.yPos;
+        get flowerPos(): Vector {
+            let pos: Vector = {x: this.xPos, y: this.yPos};
+            return pos;
         }
 
         get nectar(): number {
             return this.nectarLength;
         }
 
-        setNectar(): void {
-            this.nectarLength = 1;
+        get assign(): boolean {
+            return this.beeAssign;
+        }
+
+        setNectar (): void {
+                this.nectarLength = 1;
+        }
+
+        setAssign (_value: boolean): void {
+            this.beeAssign = _value;
         }
 
         public updateNectar(): void {
@@ -52,12 +53,12 @@ namespace Nektar {
 
 
         public updateNectar(): void {
-
-            this.nectarCounter++;
+            this.counter++;
             if (this.nectarLength < 15) {
-                if (this.nectarValue == this.nectarCounter) {
+                if (this.nectarValue == this.counter) {
                     this.nectarLength += 1;
                     this.nectarValue = Math.floor(Math.random() * 2000) + 1000;
+                    this.counter = 0;
                 }
                 crc2.save();
                 crc2.translate(this.xPos, this.yPos);
@@ -99,15 +100,17 @@ namespace Nektar {
     export class CornFlower extends Flower {
 
         public updateNectar(): void {
-
-            this.nectarCounter++;
+            this.counter++;
+            console.log(this.nectarLength);
+            
             if (this.nectarLength < 15) {
-                if (this.nectarValue == this.nectarCounter) {
+                if (this.nectarValue == this.counter) {
                     this.nectarLength += 2;
                     this.nectarValue = Math.floor(Math.random() * 2000) + 1000;
+                    this.counter = 0;
                 }
             } else {
-                console.log("nektar full");
+                // console.log("nektar full");
             }
             crc2.save();
             crc2.translate(this.xPos, this.yPos);

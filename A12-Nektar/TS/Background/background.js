@@ -78,6 +78,7 @@ var Nektar;
         } while (_xPos < Nektar.crc2.canvas.width);
     }
     Nektar.drawTree = drawTree;
+    Nektar.nectarStorageHive = 0;
     function drawBeeHive() {
         Nektar.crc2.save();
         Nektar.crc2.translate(Nektar.crc2.canvas.width / 2, Nektar.crc2.canvas.height * 0.7);

@@ -1,10 +1,10 @@
-namespace Nektar  {
+namespace End  {
 
     export interface Vector {
         x: number;
         y: number;
     }
-
+    
     export function drawBackground(): void {
         let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
         gradient.addColorStop(0, "lightblue");
@@ -93,8 +93,6 @@ namespace Nektar  {
         }
         while (_xPos < crc2.canvas.width);
     }
-    export let nectarStorageHive: number = 0;
-
 
     export function drawBeeHive(): void {
         crc2.save();

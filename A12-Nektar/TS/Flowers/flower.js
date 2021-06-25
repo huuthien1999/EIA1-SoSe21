@@ -3,29 +3,61 @@ var Nektar;
 (function (Nektar) {
     class Flower {
         xPos;
+        yPos;
         yRandomMin;
         yRandomMax;
         nectarValue = Math.floor(Math.random() * 2000) + 1000;
         nectarCounter = 0;
-        yPos;
         randomScale = 0.5 + Math.random() * (0.8 - 0.5);
-        nectarLength = 5;
+        nectarLength = 1;
         constructor(_xPos, _yRandomMin, _yRandomMax) {
             this.xPos = _xPos;
             this.yRandomMax = _yRandomMax;
             this.yRandomMin = _yRandomMin;
             this.draw();
-            this.update();
+        }
+        // get positionFlower(): Vector {
+        //     let position: Vector = {x: this.xPos, y: this.yPos};
+        //     return position;
+        // }
+        get xpositionFlower() {
+            return this.xPos;
+        }
+        get ypositionFlower() {
+            return this.yPos;
+        }
+        get nectar() {
+            return this.nectarLength;
+        }
+        setNectar() {
+            this.nectarLength = 1;
+        }
+        updateNectar() {
+            //;
         }
         draw() {
             //mate  
         }
-        update() {
-            //;
-        }
     }
     Nektar.Flower = Flower;
     class Tulip extends Flower {
+        updateNectar() {
+            this.nectarCounter++;
+            if (this.nectarLength < 15) {
+                if (this.nectarValue == this.nectarCounter) {
+                    this.nectarLength += 1;
+                    this.nectarValue = Math.floor(Math.random() * 2000) + 1000;
+                }
+                Nektar.crc2.save();
+                Nektar.crc2.translate(this.xPos, this.yPos);
+                Nektar.crc2.scale(this.randomScale, this.randomScale);
+                Nektar.crc2.beginPath();
+                Nektar.crc2.arc(0, 0, this.nectarLength, 0, 2 * Math.PI);
+                Nektar.crc2.fillStyle = "yellow";
+                Nektar.crc2.fill();
+                Nektar.crc2.restore();
+            }
+        }
         draw() {
             let y = this.yRandomMin + Math.random() * (this.yRandomMax - this.yRandomMin);
             this.yPos = y;
@@ -49,7 +81,10 @@ var Nektar;
             }
             Nektar.crc2.restore();
         }
-        update() {
+    }
+    Nektar.Tulip = Tulip;
+    class CornFlower extends Flower {
+        updateNectar() {
             this.nectarCounter++;
             if (this.nectarLength < 15) {
                 if (this.nectarValue == this.nectarCounter) {
@@ -64,14 +99,12 @@ var Nektar;
             Nektar.crc2.translate(this.xPos, this.yPos);
             Nektar.crc2.scale(this.randomScale, this.randomScale);
             Nektar.crc2.beginPath();
-            Nektar.crc2.arc(0, 0, this.nectarLength, 0, 2 * Math.PI);
+            Nektar.crc2.arc(0, -7, this.nectarLength, 0, 2 * Math.PI);
             Nektar.crc2.fillStyle = "yellow";
             Nektar.crc2.fill();
+            Nektar.crc2.stroke();
             Nektar.crc2.restore();
         }
-    }
-    Nektar.Tulip = Tulip;
-    class CornFlower extends Flower {
         draw() {
             let y = this.yRandomMin + Math.random() * (this.yRandomMax - this.yRandomMin);
             this.yPos = y;
@@ -92,27 +125,6 @@ var Nektar;
             Nektar.crc2.closePath();
             Nektar.crc2.fillStyle = "pink";
             Nektar.crc2.fill();
-            Nektar.crc2.restore();
-        }
-        update() {
-            this.nectarCounter++;
-            if (this.nectarLength < 15) {
-                if (this.nectarValue == this.nectarCounter) {
-                    this.nectarLength += 2;
-                    this.nectarValue = Math.floor(Math.random() * 2000) + 1000;
-                }
-            }
-            else {
-                console.log("nektar full");
-            }
-            Nektar.crc2.save();
-            Nektar.crc2.translate(this.xPos, this.yPos);
-            Nektar.crc2.scale(this.randomScale, this.randomScale);
-            Nektar.crc2.beginPath();
-            Nektar.crc2.arc(0, -7, this.nectarLength, 0, 2 * Math.PI);
-            Nektar.crc2.fillStyle = "yellow";
-            Nektar.crc2.fill();
-            Nektar.crc2.stroke();
             Nektar.crc2.restore();
         }
     }

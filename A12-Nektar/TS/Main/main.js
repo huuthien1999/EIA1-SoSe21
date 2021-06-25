@@ -3,8 +3,16 @@ var Nektar;
 (function (Nektar) {
     window.addEventListener("load", handleLoad);
     Nektar.golden = 0.62;
+    let Jobs;
+    (function (Jobs) {
+        Jobs[Jobs["flyToFlower"] = 0] = "flyToFlower";
+        Jobs[Jobs["drinkNectar"] = 1] = "drinkNectar";
+        Jobs[Jobs["flyBack"] = 2] = "flyBack";
+        Jobs[Jobs["storeNectar"] = 3] = "storeNectar";
+        Jobs[Jobs["flyAround"] = 4] = "flyAround";
+    })(Jobs = Nektar.Jobs || (Nektar.Jobs = {}));
     let movables = [];
-    let flowers = [];
+    Nektar.flowers = [];
     // let clouds: Cloud[] = [];
     let imageData;
     function handleLoad() {
@@ -32,14 +40,14 @@ var Nektar;
         do {
             let flowerType = Math.floor(Math.random() * 2) + 1;
             if (flowerType == 1) {
-                flowers.push(new Nektar.Tulip(xPos, 50 + (Nektar.crc2.canvas.height * Nektar.golden), Nektar.crc2.canvas.height * 0.9));
+                Nektar.flowers.push(new Nektar.Tulip(xPos, 50 + (Nektar.crc2.canvas.height * Nektar.golden), Nektar.crc2.canvas.height * 0.9));
             }
             else {
-                flowers.push(new Nektar.CornFlower(xPos, 50 + (Nektar.crc2.canvas.height * Nektar.golden), Nektar.crc2.canvas.height * 0.9));
+                Nektar.flowers.push(new Nektar.CornFlower(xPos, 50 + (Nektar.crc2.canvas.height * Nektar.golden), Nektar.crc2.canvas.height * 0.9));
             }
             xPos += 10 + Math.random() * (50 - 10);
         } while (xPos < Nektar.crc2.canvas.width);
-        console.log(flowers);
+        console.log(Nektar.flowers);
     }
     function createBees(_nBee) {
         for (let index = 0; index < _nBee; index++) {
@@ -57,8 +65,8 @@ var Nektar;
         requestAnimationFrame(animate);
         Nektar.crc2.clearRect(0, 0, Nektar.crc2.canvas.width, Nektar.crc2.canvas.height);
         Nektar.crc2.putImageData(imageData, 0, 0);
-        for (let index = 0; index < flowers.length; index++) {
-            flowers[index].update();
+        for (let index = 0; index < Nektar.flowers.length; index++) {
+            Nektar.flowers[index].updateNectar();
         }
         for (let index = 0; index < movables.length; index++) {
             movables[index].update();

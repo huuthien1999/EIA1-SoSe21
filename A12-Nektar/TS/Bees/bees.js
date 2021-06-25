@@ -2,6 +2,7 @@
 var Nektar;
 (function (Nektar) {
     class Bee extends Nektar.Movable {
+        job = Nektar.Jobs.flyAround;
         randomScale;
         randomNumber = (Math.floor(Math.random() * 2000) + 1000);
         counter = 0;
@@ -41,21 +42,59 @@ var Nektar;
             Nektar.crc2.restore();
         }
         update() {
-            if (this.posX > Nektar.crc2.canvas.width || this.posX < 0) {
-                this.velocityX = -this.velocityX;
+            switch (this.job) {
+                case Nektar.Jobs.flyToFlower:
+                    let xposFlower = Nektar.flowers[this.indexFlower].xpositionFlower;
+                    let yposFlower = Nektar.flowers[this.indexFlower].xpositionFlower;
+                    let xFlowerDiff = xposFlower - this.posX;
+                    let yFlowerDiff = yposFlower - this.posY;
+                    if (xFlowerDiff < 1 && yFlowerDiff < 1)
+                        this.job = Nektar.Jobs.drinkNectar;
+                    else {
+                        this.posX += xFlowerDiff * 0.005;
+                        this.posY += yFlowerDiff * 0.005;
+                    }
+                    break;
+                case Nektar.Jobs.drinkNectar:
+                    let nectar = Nektar.flowers[this.indexFlower].nectar;
+                    this.nectarStorage = nectar;
+                    Nektar.flowers[this.indexFlower].setNectar();
+                    this.job = Nektar.Jobs.flyBack;
+                    break;
+                case Nektar.Jobs.flyBack:
+                    // let xposFlower: number = flowers[this.indexFlower].xpositionFlower;
+                    // let yposFlower: number = flowers[this.indexFlower].xpositionFlower;
+                    let xHomeDiff = (Nektar.crc2.canvas.width / 2) - this.posX;
+                    let yHomeDiff = (Nektar.crc2.canvas.height * 0.7) - this.posY;
+                    if (xHomeDiff < 1 && yHomeDiff < 1)
+                        this.job = Nektar.Jobs.storeNectar;
+                    else {
+                        this.posX += xHomeDiff * 0.005;
+                        this.posY += yHomeDiff * 0.005;
+                    }
+                    break;
+                case Nektar.Jobs.storeNectar:
+                    Nektar.nectarStorageHive = this.nectarStorage;
+                    this.nectarStorage = 0;
+                    this.job = Nektar.Jobs.flyAround;
+                    break;
+                case Nektar.Jobs.flyAround:
+                    if (this.posX > Nektar.crc2.canvas.width || this.posX < 0) {
+                        this.velocityX = -this.velocityX;
+                    }
+                    if (this.posY > Nektar.crc2.canvas.height || this.posY < Nektar.crc2.canvas.height * 0.40) {
+                        this.velocityY = -this.velocityY;
+                    }
+                    if (this.counter == this.randomNumber) {
+                        this.velocityX = -this.velocityX;
+                        this.velocityY = -this.velocityY;
+                        this.counter = 0;
+                        this.randomNumber = (Math.floor(Math.random() * 2000) + 1000);
+                    }
+                    this.posX += this.velocityX;
+                    this.posY += this.velocityY;
+                    this.counter++;
             }
-            if (this.posY > Nektar.crc2.canvas.height || this.posY < Nektar.crc2.canvas.height * 0.40) {
-                this.velocityY = -this.velocityY;
-            }
-            if (this.counter == this.randomNumber) {
-                this.velocityX = -this.velocityX;
-                this.velocityY = -this.velocityY;
-                this.counter = 0;
-                this.randomNumber = (Math.floor(Math.random() * 2000) + 1000);
-            }
-            this.posX += this.velocityX;
-            this.posY += this.velocityY;
-            this.counter++;
         }
     }
     Nektar.Bee = Bee;

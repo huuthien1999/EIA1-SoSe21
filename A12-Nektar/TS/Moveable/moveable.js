@@ -6,11 +6,17 @@ var Nektar;
         posY;
         velocityX;
         velocityY;
+        nectarStorage;
+        indexFlower;
+        //Bienen
         constructor(_position, _velocity) {
             this.posX = _position.x;
             this.posY = _position.y;
             this.velocityX = _velocity.x;
             this.velocityY = _velocity.y;
+        }
+        setIndex(_index) {
+            this.indexFlower = _index;
         }
         draw() {
             //Draw
