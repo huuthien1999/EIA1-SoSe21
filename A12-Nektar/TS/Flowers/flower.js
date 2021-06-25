@@ -2,6 +2,7 @@
 var Nektar;
 (function (Nektar) {
     class Flower {
+        assign = false;
         xPos;
         yPos;
         yRandomMin;
@@ -29,8 +30,14 @@ var Nektar;
         get nectar() {
             return this.nectarLength;
         }
+        get assignFlower() {
+            return this.assign;
+        }
         setNectar() {
             this.nectarLength = 1;
+        }
+        setAssign(_value) {
+            this.assign = _value;
         }
         updateNectar() {
             //;
@@ -47,6 +54,7 @@ var Nektar;
                 if (this.nectarValue == this.nectarCounter) {
                     this.nectarLength += 1;
                     this.nectarValue = Math.floor(Math.random() * 2000) + 1000;
+                    this.nectarCounter = 0;
                 }
                 Nektar.crc2.save();
                 Nektar.crc2.translate(this.xPos, this.yPos);
@@ -90,6 +98,7 @@ var Nektar;
                 if (this.nectarValue == this.nectarCounter) {
                     this.nectarLength += 2;
                     this.nectarValue = Math.floor(Math.random() * 2000) + 1000;
+                    this.nectarCounter = 0;
                 }
             }
             else {

@@ -1,7 +1,7 @@
 namespace Nektar {
 
     export class Bee extends Movable {
-        private job: Jobs = Jobs.flyAround;
+        
         private randomScale: number;
         private randomNumber: number = (Math.floor(Math.random() * 2000) + 1000);
         private counter: number = 0;
@@ -61,7 +61,7 @@ namespace Nektar {
                     let yFlowerDiff: number = yposFlower - this.posY;
                    
                     if (xFlowerDiff < 1 && yFlowerDiff < 1)
-                        this.job = Jobs.drinkNectar;
+                        this.setJobTask(Jobs.drinkNectar);
                     else {
                         this.posX += xFlowerDiff * 0.005;
                         this.posY += yFlowerDiff * 0.005;
@@ -73,7 +73,7 @@ namespace Nektar {
                     this.nectarStorage = nectar;
 
                     flowers[this.indexFlower].setNectar();
-                    this.job = Jobs.flyBack;
+                    this.setJobTask(Jobs.flyBack);
                     break;
             
                 case Jobs.flyBack:
@@ -84,16 +84,17 @@ namespace Nektar {
                     let yHomeDiff: number = (crc2.canvas.height * 0.7) - this.posY;
                    
                     if (xHomeDiff < 1 && yHomeDiff < 1)
-                        this.job = Jobs.storeNectar;
+                        this.setJobTask(Jobs.storeNectar);
                     else {
                         this.posX += xHomeDiff * 0.005;
                         this.posY += yHomeDiff * 0.005;
                     }
                     break;
                 case Jobs.storeNectar:
-                    nectarStorageHive = this.nectarStorage;
+                    nectarStorageHive += this.nectarStorage;
                     this.nectarStorage = 0;
-                    this.job = Jobs.flyAround;
+                    this.setJobTask(Jobs.flyAround);
+                    flowers[this.indexFlower].setAssign(false);
                     break;
                     
                 case Jobs.flyAround:

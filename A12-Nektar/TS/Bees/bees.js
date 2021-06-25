@@ -2,7 +2,6 @@
 var Nektar;
 (function (Nektar) {
     class Bee extends Nektar.Movable {
-        job = Nektar.Jobs.flyAround;
         randomScale;
         randomNumber = (Math.floor(Math.random() * 2000) + 1000);
         counter = 0;
@@ -49,7 +48,7 @@ var Nektar;
                     let xFlowerDiff = xposFlower - this.posX;
                     let yFlowerDiff = yposFlower - this.posY;
                     if (xFlowerDiff < 1 && yFlowerDiff < 1)
-                        this.job = Nektar.Jobs.drinkNectar;
+                        this.setJobTask(Nektar.Jobs.drinkNectar);
                     else {
                         this.posX += xFlowerDiff * 0.005;
                         this.posY += yFlowerDiff * 0.005;
@@ -59,7 +58,7 @@ var Nektar;
                     let nectar = Nektar.flowers[this.indexFlower].nectar;
                     this.nectarStorage = nectar;
                     Nektar.flowers[this.indexFlower].setNectar();
-                    this.job = Nektar.Jobs.flyBack;
+                    this.setJobTask(Nektar.Jobs.flyBack);
                     break;
                 case Nektar.Jobs.flyBack:
                     // let xposFlower: number = flowers[this.indexFlower].xpositionFlower;
@@ -67,16 +66,17 @@ var Nektar;
                     let xHomeDiff = (Nektar.crc2.canvas.width / 2) - this.posX;
                     let yHomeDiff = (Nektar.crc2.canvas.height * 0.7) - this.posY;
                     if (xHomeDiff < 1 && yHomeDiff < 1)
-                        this.job = Nektar.Jobs.storeNectar;
+                        this.setJobTask(Nektar.Jobs.storeNectar);
                     else {
                         this.posX += xHomeDiff * 0.005;
                         this.posY += yHomeDiff * 0.005;
                     }
                     break;
                 case Nektar.Jobs.storeNectar:
-                    Nektar.nectarStorageHive = this.nectarStorage;
+                    Nektar.nectarStorageHive += this.nectarStorage;
                     this.nectarStorage = 0;
-                    this.job = Nektar.Jobs.flyAround;
+                    this.setJobTask(Nektar.Jobs.flyAround);
+                    Nektar.flowers[this.indexFlower].setAssign(false);
                     break;
                 case Nektar.Jobs.flyAround:
                     if (this.posX > Nektar.crc2.canvas.width || this.posX < 0) {

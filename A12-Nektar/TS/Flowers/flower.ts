@@ -1,5 +1,7 @@
 namespace Nektar {
     export abstract class Flower {
+        protected assign: boolean = false;
+
         protected xPos: number;
         protected yPos: number;
         protected yRandomMin: number;
@@ -21,6 +23,8 @@ namespace Nektar {
         //     let position: Vector = {x: this.xPos, y: this.yPos};
         //     return position;
         // }
+
+        
         get xpositionFlower(): number {
             return this.xPos;
         }
@@ -33,10 +37,19 @@ namespace Nektar {
             return this.nectarLength;
         }
 
+        get assignFlower(): boolean {
+            return this.assign; 
+        }
+        
+
         setNectar(): void {
             this.nectarLength = 1;
         }
 
+        setAssign(_value: boolean): void {
+            this.assign = _value;
+        }
+        
         public updateNectar(): void {
             //;
         }
@@ -52,12 +65,12 @@ namespace Nektar {
 
 
         public updateNectar(): void {
-
             this.nectarCounter++;
             if (this.nectarLength < 15) {
                 if (this.nectarValue == this.nectarCounter) {
                     this.nectarLength += 1;
                     this.nectarValue = Math.floor(Math.random() * 2000) + 1000;
+                    this.nectarCounter = 0;
                 }
                 crc2.save();
                 crc2.translate(this.xPos, this.yPos);
@@ -105,6 +118,7 @@ namespace Nektar {
                 if (this.nectarValue == this.nectarCounter) {
                     this.nectarLength += 2;
                     this.nectarValue = Math.floor(Math.random() * 2000) + 1000;
+                    this.nectarCounter = 0;
                 }
             } else {
                 console.log("nektar full");

@@ -1,6 +1,8 @@
 namespace Nektar {
     
 export abstract class Movable {
+    protected job: Jobs = Jobs.flyAround;
+    protected doingJob: boolean = false;
     
     protected posX: number;
     protected posY: number;
@@ -24,10 +26,27 @@ export abstract class Movable {
           this.velocityY = _velocity.y;
     }
 
-    setIndex(_index: number){
+    get doingJobBee(): boolean {
+        return this.doingJob;
+    }
+
+    // setdoingJob(_value: boolean): void{
+    //     this.doingJob = _value;
+    // }
+
+    setIndex(_index: number): void {
         this.indexFlower = _index;
     }
 
+    setJobTask(_job: Jobs): void {
+        this.job = _job;
+        if (this.job == Jobs.flyAround) {
+            this.doingJob = false;
+        }
+        else {
+            this.doingJob = true;
+        }
+    }
 
     public draw(): void {
         //Draw

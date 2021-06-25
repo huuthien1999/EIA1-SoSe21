@@ -12,11 +12,13 @@ var Nektar;
         Jobs[Jobs["flyAround"] = 4] = "flyAround";
     })(Jobs = Nektar.Jobs || (Nektar.Jobs = {}));
     let movables = [];
+    Nektar.bees = [];
     Nektar.flowers = [];
-    // let clouds: Cloud[] = [];
     let imageData;
+    // let indexBee: number;
     function handleLoad() {
         let canvas = document.querySelector("canvas");
+        canvas.addEventListener("click", clickBee);
         Nektar.crc2 = canvas.getContext("2d");
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -54,8 +56,16 @@ var Nektar;
             let randomScale = 0.5 + Math.random() * (2.5 - 1.3);
             let randomVelocityX = (Math.random() - 0.5) * 5;
             let randomVelocityY = (Math.random() - 0.5) * 5;
-            movables.push(new Nektar.Bee({ x: Nektar.crc2.canvas.width / 2, y: Nektar.crc2.canvas.height * Nektar.golden }, { x: randomVelocityX, y: randomVelocityY }, randomScale));
+            Nektar.bees.push(new Nektar.Bee({ x: Nektar.crc2.canvas.width / 2, y: Nektar.crc2.canvas.height * Nektar.golden }, { x: randomVelocityX, y: randomVelocityY }, randomScale));
         }
+    }
+    function clickBee(_event) {
+        let mouseX = _event.clientX;
+        let mouseY = _event.clientY;
+        let randomScale = 0.5 + Math.random() * (2.5 - 1.3);
+        let randomVelocityX = (Math.random() - 0.5) * 5;
+        let randomVelocityY = (Math.random() - 0.5) * 5;
+        Nektar.bees.push(new Nektar.Bee({ x: mouseX, y: mouseY }, { x: randomVelocityX, y: randomVelocityY }, randomScale));
     }
     function createCloud() {
         movables.push(new Nektar.Cloud({ x: Nektar.crc2.canvas.width * .10, y: Nektar.crc2.canvas.height * .10 }, { x: 0.5, y: 0.1 }));
@@ -71,6 +81,26 @@ var Nektar;
         for (let index = 0; index < movables.length; index++) {
             movables[index].update();
             movables[index].draw();
+        }
+        for (let indexFlower = 0; indexFlower < Nektar.flowers.length; indexFlower++) {
+            if (Nektar.flowers[indexFlower].assignFlower == false) {
+                if (Nektar.flowers[indexFlower].nectar > 7) {
+                    // indexFlower = index;
+                    for (let index = 0; index < Nektar.bees.length; index++) {
+                        if (Nektar.bees[index].doingJobBee == false) {
+                            // indexBee = index;
+                            Nektar.flowers[indexFlower].setAssign(true);
+                            Nektar.bees[index].setIndex(indexFlower);
+                            Nektar.bees[index].setJobTask(Jobs.flyToFlower);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        for (let index = 0; index < Nektar.bees.length; index++) {
+            Nektar.bees[index].update();
+            Nektar.bees[index].draw();
         }
     }
 })(Nektar || (Nektar = {}));
