@@ -9,6 +9,7 @@ namespace End {
         constructor(_position: Vector, _velocity: Vector, _randomScale: number) {
             super(_position, _velocity);
             this.randomScale = _randomScale;
+            
         }
 
         public draw(): void {
