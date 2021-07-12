@@ -44,7 +44,7 @@ namespace Endabgabe {
         // player2 = new Player(550, 450, 1);
         createPlayer();
         // test();
-        // animate();
+        animate();
     }
 
     
