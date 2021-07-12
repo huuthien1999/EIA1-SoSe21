@@ -42,8 +42,8 @@ namespace Endabgabe {
             }
                 
             else {
-                this.position.x += diff.x * 0.005;
-                this.position.y += diff.y * 0.005;
+                this.position.x += diff.x * 0.05;
+                this.position.y += diff.y * 0.05;
                 console.log("yelp1");
             }
            }

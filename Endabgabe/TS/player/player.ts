@@ -2,18 +2,18 @@ namespace Endabgabe {
 
     export class Player extends Human {
         private task: Task;
-        private origin: Vector;
+        
         private minSpeed: number;
         private maxSpeed: number;
         private minPrecision: number;
         private maxPrecision: number;
         private radius: number = 100;
         private jerseyNumber: number;
+        
 
         constructor(_position: Vector, _jerseyColor: string, _minSpeed: number, _maxSpeed: number, _minPrecision: number, _maxPrecision: number) {
             super(_position, _jerseyColor);
             this.setProperties(_minSpeed, _maxSpeed, _minPrecision, _maxPrecision);
-            this.origin = _position;
             this.velocity =  this.minSpeed + Math.random() * (this.maxSpeed -  this.minSpeed);
         }
 
@@ -23,7 +23,13 @@ namespace Endabgabe {
             this.minPrecision = _minPrecision;
             this.maxPrecision = _maxPrecision;
         }
+
         
+        public get playerProperties() : number {
+            return this.minSpeed;
+        }
+        
+
         public draw(): void {
             crc2.beginPath();
             crc2.arc(this.position.x, this.position.y, 10, 0, 2 * Math.PI);
@@ -33,6 +39,7 @@ namespace Endabgabe {
             crc2.closePath();
         }
         
+             
         // public drawRadius(): void {
         //     // crc2.beginPath();
         //     // crc2.arc(this.posX, this.posY, 100, 0, 2 * Math.PI);
@@ -41,21 +48,22 @@ namespace Endabgabe {
         // }
 
         public update(): void {
-            console.log(this.origin);
             let distance: number = this.getDistance();
-            console.log(distance);
             if (distance < this.radius) {
                 this.task = Task.walkToBall;
             }
             else {
-                if (this.position == this.origin) {
-                    // console.log(this.position, this.origin);
+                if (this.position == super.playerOrigin) {
+                    console.log(this.origin);
                     this.task = Task.lookForBall;
                     console.log("icj bin jier");
                 }
                 else {
                     this.task = Task.walkToOrigin;
+                    console.log(super.origin);
                     console.log("ich lauf nach hause");
+                    
+                    this.movePlayer(super.playerOrigin);
                 }
             }
             switch (this.task) {
@@ -137,3 +145,5 @@ namespace Endabgabe {
 
  
 }
+
+

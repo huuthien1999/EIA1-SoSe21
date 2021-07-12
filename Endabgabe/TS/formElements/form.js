@@ -7,7 +7,9 @@ var Endabgabe;
         console.log("jo");
         let formData = new FormData(document.forms[0]);
         Endabgabe.valuesGlobal = [];
-        formData.append("maxSpeed", "10");
+        // let entries: FormData = 
+        formData.set("maxSpeed", "0.1");
+        formData.set("team1Color", "#ffffff");
         // for (let entry of formData) {
         //     console.log(entry[1]);
         //     valuesGlobal.push(String(entry[1]));
@@ -17,10 +19,13 @@ var Endabgabe;
     function updateForm(_event) {
         let mouse = { x: _event.clientX, y: _event.clientY };
         for (let index = 0; index < Endabgabe.players.length; index++) {
-            console.log(Endabgabe.players[index].playerPosition.x - mouse.x);
-            if ((Endabgabe.players[index].playerPosition.x - mouse.x) < 5 && (Endabgabe.players[index].playerPosition.y - mouse.y) < 5) {
+            console.log(distance(mouse, Endabgabe.players[index].playerPosition));
+            if (distance(mouse, Endabgabe.players[index].playerPosition) < 10) {
+                console.log;
+                let chosenPlayer = Endabgabe.players[index];
                 playerIndex = index;
-                console.log("hit", playerIndex);
+                console.log(chosenPlayer.playerProperties);
+                // console.log("hit", playerIndex);
                 break;
             }
         }
@@ -33,5 +38,11 @@ var Endabgabe;
     //         console.log(valuesGlobal[index]);
     //     }
     // }
+    function distance(_mousePos, _playerPosition) {
+        let rect = Endabgabe.canvas.getBoundingClientRect();
+        let distanceX = (_mousePos.x - rect.left) - _playerPosition.x;
+        let distanceY = (_mousePos.y - rect.top) - _playerPosition.y;
+        return Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2));
+    }
 })(Endabgabe || (Endabgabe = {}));
 //# sourceMappingURL=form.js.map

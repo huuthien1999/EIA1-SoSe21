@@ -2,6 +2,7 @@
 var Endabgabe;
 (function (Endabgabe) {
     window.addEventListener("load", handleLoad);
+    // export let golden: number = 0.62;
     let Task;
     (function (Task) {
         Task[Task["lookForBall"] = 0] = "lookForBall";
@@ -31,28 +32,28 @@ var Endabgabe;
         // animate();
     }
     function createPlayer() {
-        for (let index = 0; index < 14; index++) {
+        for (let index = 0; index < 12; index++) {
             if (index < 11) {
                 Endabgabe.players.push(new Endabgabe.Player(Endabgabe.positionsTeam1[index], "red", 0.3, 0.5, 50, 50));
+                Endabgabe.players[index].setorigin(Endabgabe.positionsTeam1[index]);
             }
             else {
                 Endabgabe.players.push(new Endabgabe.Player(Endabgabe.positionsTeam1[index], "red", 0.3, 0.5, 50, 50));
             }
         }
-        for (let index = 0; index < 14; index++) {
+        for (let index = 0; index < 12; index++) {
             if (index < 11) {
-                Endabgabe.players.push(new Endabgabe.Player(Endabgabe.positionsTeam2[index], "blue", 0.3, 0.5, 50, 50));
+                Endabgabe.players.push(new Endabgabe.Player(Endabgabe.positionsTeam2[index], "blue", 0.2, 0.5, 50, 50));
             }
             else {
                 Endabgabe.players.push(new Endabgabe.Player(Endabgabe.positionsTeam2[index], "blue", 0.3, 0.5, 50, 50));
             }
         }
-        // for (let index: number = 0; index < 11; index++) {
-        // }
     }
     function shootBall(_event) {
-        let mouseX = _event.clientX;
-        let mouseY = _event.clientY;
+        let rect = Endabgabe.canvas.getBoundingClientRect();
+        let mouseX = _event.clientX - rect.left;
+        let mouseY = _event.clientY - rect.top;
         Endabgabe.key = true;
         Endabgabe.ball.setnewPosition({ x: mouseX, y: mouseY });
         Endabgabe.animationKey = false;

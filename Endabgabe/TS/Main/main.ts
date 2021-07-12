@@ -4,7 +4,7 @@ namespace Endabgabe {
     export let crc2: CanvasRenderingContext2D;
     export let canvas: HTMLCanvasElement;
     // export let golden: number = 0.62;
-    export let form: HTMLDivElement;
+    
     export enum Task {
         lookForBall,
         walkToBall,
@@ -18,6 +18,14 @@ namespace Endabgabe {
     export let animationKey: boolean = false;
     export let players: Human[] = [];
 
+    //HTML ELEMENTE & FORM ELEMENTE//
+    //Form Left
+    export let form: HTMLDivElement;
+    export let playerNumberDOMElement: HTMLParagraphElement;
+    export let teamDOMElement: HTMLParagraphElement;
+    //Form Right
+    export let teamADOMElement: HTMLButtonElement;
+    export let teamBDOMElement: HTMLButtonElement;
 
     function handleLoad(): void {
 
@@ -36,42 +44,35 @@ namespace Endabgabe {
         // player2 = new Player(550, 450, 1);
         createPlayer();
         // test();
-        
-        
         // animate();
     }
 
     
 
     function createPlayer(): void {
-        for (let index: number = 0; index < 14; index++) {
+        for (let index: number = 0; index < 12; index++) {
             if (index < 11) {
                 players.push(new Player(positionsTeam1[index], "red", 0.3, 0.5, 50, 50));
+                players[index].setorigin(positionsTeam1[index]);
             }
             else {
                 players.push(new Player(positionsTeam1[index], "red", 0.3, 0.5, 50, 50));
             }
         }
-        for (let index: number = 0; index < 14; index++) {
+        for (let index: number = 0; index < 12; index++) {
             if (index < 11) {
-                players.push(new Player(positionsTeam2[index], "blue", 0.3, 0.5, 50, 50));
+                players.push(new Player(positionsTeam2[index], "blue", 0.2, 0.5, 50, 50));
             }
             else {
                 players.push(new Player(positionsTeam2[index], "blue", 0.3, 0.5, 50, 50));
             }
-        }
-
-        // for (let index: number = 0; index < 11; index++) {
-            
-        // }
-
-
-        
+        }      
     }
 
     function shootBall(_event: MouseEvent): void {
-        let mouseX: number = _event.clientX;
-        let mouseY: number = _event.clientY;
+        let rect: DOMRect = canvas.getBoundingClientRect();
+        let mouseX: number = _event.clientX - rect.left;
+        let mouseY: number = _event.clientY - rect.top  ;
         key = true;
         ball.setnewPosition({x: mouseX, y: mouseY});
         animationKey = false;

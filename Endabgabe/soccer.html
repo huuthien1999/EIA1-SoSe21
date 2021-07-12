@@ -8,9 +8,9 @@
 
     <title>Canvas</title>
     <!-- <script src="TS/Moveable/moveable.js" defer></script> -->
-   
-    <script src="TS/human/human.js" defer></script>
     <script src="TS/positions/positions.js" defer></script>
+    <script src="TS/human/human.js" defer></script>
+   
    
     <script src="TS/player/player.js" defer></script>
     <script src="TS/ball/ball.js" defer></script>
@@ -45,10 +45,10 @@
 
 
         <label for="maxSpeed">Maximal Speed</label><br>
-        <input type="range" id="maxSpeed" name="maxSpeed" step="1" max="25" min="5" ><br>
+        <input type="range" id="maxSpeed" name="maxSpeed" step="0.1" max="1" min="0.6" ><br>
 
         <label for="minSpeed">Minimal Speed</label><br>
-        <input type="range" id="minSpeed" name="minSpeed" step="1" max="25" min="5" ><br>
+        <input type="range" id="minSpeed" name="minSpeed" step="0.1" max="0.5" min="0.2" ><br>
 
         <label for="maxPre">Maximal Precision</label><br>
         <input type="range" id="maxPre" name="maxPre" step="1" max="25" min="5" ><br>
@@ -76,43 +76,41 @@
         <button id="teamA">Team A</button>
         <button id="teamB">Team B</button>
 
-        <label for="subPlayer">Substitute Player:</label><br>
+        <label for="subPlayer">Player:</label><br>
+
         <select name="subPlayer" id="subPlayer">
             <option value="Arial">Arial</option>
             <option value="Helvetica">Helvetica</option>
             <option value="Verdana">Verdana</option>
         </select>
 
+        <p>Speed</p>
+        <p>Max: <p id="rightMaxSpeedPlayer"></p> </p>
+        <p>Min: <p id="rightMinSpeedPlayer"></p></p>
+        
+        <p>Precision</p>
+        <p>Max: <p id="rightMaxPrecPlayer"></p> </p>
+        <p>Min: <p id="rightMinPrecPlayer"></p></p>
 
 
+        
+        <label for="subPlayer">Substitute:</label><br>
 
-        <label for="subPlayer">Substitute Player:</label><br>
         <select name="subPlayer" id="subPlayer">
             <option value="Arial">Arial</option>
             <option value="Helvetica">Helvetica</option>
             <option value="Verdana">Verdana</option>
         </select>
-        <label for="sizeInput">Größe der Karten</label>
-        <br>
-        <input type="range" style="width: 100%;" step="1" min="150" max="250" name="sizeInput">
 
-        <label for="background">Hintergrundfarbe</label>
-        <br>
-        <input name="background" type="color" id="colorpicker1"  value="#ff0000" style="width:85%;">
-        <br>
-        <label for="backCardColor">Farbe von Kartenrücken</label>
-        <br>
-        <input name="backCardColor" type="color" id="colorpicker2"  value="#ff0000" style="width:85%;">
-        <br>
-        <label for="fontColor">Schriftfarbe</label>
-        <br>
-        <input name="fontColor" type="color" id="colorpicker3"  value="#ff0000" style="width:85%;">
-<br>
-        <select name="font" id="fontSelect">
-            <option value="Arial">Arial</option>
-            <option value="Helvetica">Helvetica</option>
-            <option value="Verdana">Verdana</option>
-        </select>
+        <p>Speed</p>
+        <p>Max: <p id="rightMaxSpeedSub"></p> </p>
+        <p>Min: <p id="rightMinSpeedSub"></p></p>
+        
+        <p>Precision</p>
+        <p>Max: <p id="rightMaxPrecSub"></p> </p>
+        <p>Min: <p id="rightMinPrecSub"></p></p>
+
+       
     </form>
 </div>
 

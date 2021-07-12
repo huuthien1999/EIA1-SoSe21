@@ -5,13 +5,21 @@ var Endabgabe;
         velocity;
         position;
         jerseyColor;
+        origin;
         constructor(_position, _jerseyColor) {
             this.position = _position;
             this.jerseyColor = _jerseyColor;
-            // this.origin = _position;
             this.draw();
         }
         // private origin: Vector;
+        get playerOrigin() {
+            return this.origin;
+        }
+        setorigin(_position2) {
+            console.log("hahahahahahahahaahahahahahahahhahahahaahhaahahahahahahhaah");
+            this.origin = _position2;
+            console.log(this.origin);
+        }
         get playerPosition() {
             return this.position;
         }
