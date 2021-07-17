@@ -38,6 +38,7 @@ namespace Endabgabe {
         canvas.width = 1300;
         canvas.height = 700;
         drawField();
+        //test
         imageData = crc2.getImageData(0, 0, canvas.width, canvas.height);
         ball = new Ball({x: canvas.width * 0.5, y: canvas.height * 0.5});
         // player = new Player(500, 500, 0.5);
@@ -93,7 +94,5 @@ namespace Endabgabe {
         ball.update();
         ball.draw();
     }
-       
-        
     }
 }
