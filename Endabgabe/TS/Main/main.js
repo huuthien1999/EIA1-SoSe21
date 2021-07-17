@@ -35,7 +35,6 @@ var Endabgabe;
         for (let index = 0; index < 12; index++) {
             if (index < 11) {
                 Endabgabe.players.push(new Endabgabe.Player(Endabgabe.positionsTeam1[index], "red", 0.3, 0.5, 50, 50));
-                Endabgabe.players[index].setorigin(Endabgabe.positionsTeam1[index]);
             }
             else {
                 Endabgabe.players.push(new Endabgabe.Player(Endabgabe.positionsTeam1[index], "red", 0.3, 0.5, 50, 50));

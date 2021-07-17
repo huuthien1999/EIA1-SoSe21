@@ -2,7 +2,7 @@ namespace Endabgabe {
 
     export class Player extends Human {
         private task: Task;
-        
+        private origin: Vector;
         private minSpeed: number;
         private maxSpeed: number;
         private minPrecision: number;
@@ -15,6 +15,7 @@ namespace Endabgabe {
             super(_position, _jerseyColor);
             this.setProperties(_minSpeed, _maxSpeed, _minPrecision, _maxPrecision);
             this.velocity =  this.minSpeed + Math.random() * (this.maxSpeed -  this.minSpeed);
+            this.origin = {x: _position.x, y: _position.y};
         }
 
         setProperties(_minSpeed: number, _maxSpeed: number, _minPrecision: number, _maxPrecision: number): void {
@@ -53,17 +54,17 @@ namespace Endabgabe {
                 this.task = Task.walkToBall;
             }
             else {
-                if (this.position == super.playerOrigin) {
+                if (this.position == this.origin) {
                     console.log(this.origin);
                     this.task = Task.lookForBall;
                     console.log("icj bin jier");
                 }
                 else {
                     this.task = Task.walkToOrigin;
-                    console.log(super.origin);
+                    // console.log(super.origin);
                     console.log("ich lauf nach hause");
                     
-                    this.movePlayer(super.playerOrigin);
+                    this.movePlayer(this.origin);
                 }
             }
             switch (this.task) {

@@ -53,7 +53,7 @@ namespace Endabgabe {
         for (let index: number = 0; index < 12; index++) {
             if (index < 11) {
                 players.push(new Player(positionsTeam1[index], "red", 0.3, 0.5, 50, 50));
-                players[index].setorigin(positionsTeam1[index]);
+                
             }
             else {
                 players.push(new Player(positionsTeam1[index], "red", 0.3, 0.5, 50, 50));

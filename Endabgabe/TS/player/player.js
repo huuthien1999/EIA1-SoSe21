@@ -3,6 +3,7 @@ var Endabgabe;
 (function (Endabgabe) {
     class Player extends Endabgabe.Human {
         task;
+        origin;
         minSpeed;
         maxSpeed;
         minPrecision;
@@ -13,6 +14,7 @@ var Endabgabe;
             super(_position, _jerseyColor);
             this.setProperties(_minSpeed, _maxSpeed, _minPrecision, _maxPrecision);
             this.velocity = this.minSpeed + Math.random() * (this.maxSpeed - this.minSpeed);
+            this.origin = { x: _position.x, y: _position.y };
         }
         setProperties(_minSpeed, _maxSpeed, _minPrecision, _maxPrecision) {
             this.minSpeed = _minSpeed;
@@ -43,16 +45,16 @@ var Endabgabe;
                 this.task = Endabgabe.Task.walkToBall;
             }
             else {
-                if (this.position == super.playerOrigin) {
+                if (this.position == this.origin) {
                     console.log(this.origin);
                     this.task = Endabgabe.Task.lookForBall;
                     console.log("icj bin jier");
                 }
                 else {
                     this.task = Endabgabe.Task.walkToOrigin;
-                    console.log(super.origin);
+                    // console.log(super.origin);
                     console.log("ich lauf nach hause");
-                    this.movePlayer(super.playerOrigin);
+                    this.movePlayer(this.origin);
                 }
             }
             switch (this.task) {
