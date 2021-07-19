@@ -10,7 +10,6 @@ var Endabgabe;
             this.jerseyColor = _jerseyColor;
             this.draw();
         }
-        // private origin: Vector;
         get playerPosition() {
             return this.position;
         }
@@ -19,6 +18,9 @@ var Endabgabe;
         }
         update() {
             //polymorphie
+        }
+        setJersey(_color) {
+            this.jerseyColor = _color;
         }
     }
     Endabgabe.Human = Human;

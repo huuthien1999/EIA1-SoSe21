@@ -2,125 +2,128 @@
 var Endabgabe;
 (function (Endabgabe) {
     class Player extends Endabgabe.Human {
-        task;
+        task = Endabgabe.Task.lookForBall;
         origin;
-        minSpeed;
-        maxSpeed;
-        minPrecision;
-        maxPrecision;
-        radius = 100;
+        precision;
+        radius = 80;
         jerseyNumber;
-        constructor(_position, _jerseyColor, _minSpeed, _maxSpeed, _minPrecision, _maxPrecision) {
+        distancePlayerBall;
+        onField;
+        team;
+        newPosition;
+        constructor(_position, _jerseyColor, _onField, _jerseyNumber, _team) {
             super(_position, _jerseyColor);
-            this.setProperties(_minSpeed, _maxSpeed, _minPrecision, _maxPrecision);
-            this.velocity = this.minSpeed + Math.random() * (this.maxSpeed - this.minSpeed);
-            this.origin = { x: _position.x, y: _position.y };
+            this.onField = _onField;
+            this.velocity = 0.5;
+            this.jerseyNumber = _jerseyNumber;
+            this.origin = this.position.copy();
+            this.team = _team;
+        }
+        get playerOrigin() {
+            return this.origin;
+        }
+        get jerseyNumberPlayer() {
+            return this.jerseyNumber;
+        }
+        get playerSpeed() {
+            return this.velocity;
+        }
+        get distance() {
+            return this.distancePlayerBall;
+        }
+        get playerPrecision() {
+            return this.precision;
+        }
+        get playerOnField() {
+            return this.onField;
+        }
+        get playerTeam() {
+            return this.team;
+        }
+        setOnField(_onField) {
+            this.onField = _onField;
+        }
+        setOrigin(_position) {
+            this.origin = _position;
         }
         setProperties(_minSpeed, _maxSpeed, _minPrecision, _maxPrecision) {
-            this.minSpeed = _minSpeed;
-            this.maxSpeed = _maxSpeed;
-            this.minPrecision = _minPrecision;
-            this.maxPrecision = _maxPrecision;
+            this.precision = _minPrecision + Math.random() * (_maxPrecision - _minPrecision);
+            this.velocity = _minSpeed + Math.random() * (_maxSpeed - _minSpeed);
         }
-        get playerProperties() {
-            return this.minSpeed;
+        setDistance() {
+            let ballPos = Endabgabe.ball.ballPos;
+            this.distancePlayerBall = Endabgabe.Vector.getdistance(ballPos, this.position);
         }
         draw() {
             Endabgabe.crc2.beginPath();
             Endabgabe.crc2.arc(this.position.x, this.position.y, 10, 0, 2 * Math.PI);
-            Endabgabe.crc2.stroke();
             Endabgabe.crc2.fillStyle = this.jerseyColor;
             Endabgabe.crc2.fill();
+            Endabgabe.crc2.textAlign = "center";
+            Endabgabe.crc2.fillStyle = "black";
+            Endabgabe.crc2.fillText(String(this.jerseyNumber), this.position.x, this.position.y);
             Endabgabe.crc2.closePath();
         }
-        // public drawRadius(): void {
-        //     // crc2.beginPath();
-        //     // crc2.arc(this.posX, this.posY, 100, 0, 2 * Math.PI);
-        //     // crc2.stroke();
-        //     // crc2.closePath();
-        // }
-        update() {
-            let distance = this.getDistance();
-            if (distance < this.radius) {
-                this.task = Endabgabe.Task.walkToBall;
-            }
-            else {
-                if (this.position == this.origin) {
-                    console.log(this.origin);
-                    this.task = Endabgabe.Task.lookForBall;
-                    console.log("icj bin jier");
-                }
-                else {
-                    this.task = Endabgabe.Task.walkToOrigin;
-                    // console.log(super.origin);
-                    console.log("ich lauf nach hause");
-                    this.movePlayer(this.origin);
-                }
-            }
-            switch (this.task) {
-                case Endabgabe.Task.lookForBall:
-                    console.log("lookforVBall");
-                    break;
-                case Endabgabe.Task.walkToBall:
-                    if (distance < 10) {
-                        console.log("ichbinnah");
-                        this.task = Endabgabe.Task.shootBall;
-                    }
-                    else {
-                        console.log("moveToBall");
-                        this.movePlayer(Endabgabe.ball.ballPos);
-                    }
-                    break;
-                case Endabgabe.Task.shootBall:
-                    Endabgabe.animationKey = true;
-                    this.task = Endabgabe.Task.walkToOrigin;
-                    break;
-                case Endabgabe.Task.walkToOrigin:
-                    this.movePlayer(this.origin);
-            }
+        changePlayer(_position) {
+            this.newPosition = _position;
+            console.log(this.newPosition);
+            this.task = Endabgabe.Task.changePlayer;
         }
-        getDistance() {
-            let ballPos = Endabgabe.ball.ballPos;
-            let distanceX = ballPos.x - this.position.x;
-            let distanceY = ballPos.y - this.position.y;
-            return Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2));
+        update() {
+            if (this.onField == true) {
+                this.setDistance();
+                switch (this.task) {
+                    case Endabgabe.Task.lookForBall:
+                        if (this.distancePlayerBall < this.radius) {
+                            this.task = Endabgabe.Task.walkToBall;
+                        }
+                        break;
+                    case Endabgabe.Task.walkToBall:
+                        if (this.distancePlayerBall > this.radius) {
+                            this.task = Endabgabe.Task.walkToOrigin;
+                        }
+                        else {
+                            if (this.distancePlayerBall < 10) {
+                                this.task = Endabgabe.Task.shootBall;
+                            }
+                            this.movePlayer(Endabgabe.ball.ballPos);
+                        }
+                        break;
+                    case Endabgabe.Task.shootBall:
+                        if (this.distancePlayerBall > 20 || (Endabgabe.ball.getKey) == false) {
+                            Endabgabe.ball.setKey(true);
+                            this.task = Endabgabe.Task.walkToOrigin;
+                        }
+                        break;
+                    case Endabgabe.Task.walkToOrigin:
+                        this.movePlayer(this.origin);
+                        if (Endabgabe.Vector.getdistance(this.origin, this.position) < 1) {
+                            this.task = Endabgabe.Task.lookForBall;
+                        }
+                        break;
+                    case Endabgabe.Task.changePlayer:
+                        this.movePlayer(this.newPosition);
+                        if (Endabgabe.Vector.getdistance(this.newPosition, this.position) < 1) {
+                            if (this.position.y > 470 || this.position.y < 30) {
+                                this.setOnField(false);
+                                this.task = Endabgabe.Task.lookForBall;
+                            }
+                            else {
+                                this.setOnField(true);
+                                this.task = Endabgabe.Task.lookForBall;
+                            }
+                        }
+                        break;
+                }
+            }
         }
         movePlayer(_positon) {
-            let playerDistance = { x: _positon.x - this.position.x, y: _positon.y - this.position.y };
-            if (this.getDistance() > 5) {
-                if (playerDistance.x == 0 && playerDistance.y > 0) {
-                    this.position.y += this.velocity;
-                }
-                if (playerDistance.x == 0 && playerDistance.y < 0) {
-                    this.position.y += -this.velocity;
-                }
-                if (playerDistance.x > 0 && playerDistance.y == 0) {
-                    this.position.x += this.velocity;
-                }
-                if (playerDistance.x < 0 && playerDistance.y == 0) {
-                    this.position.x += -this.velocity;
-                }
-                if (playerDistance.x > 0 && playerDistance.y > 0) {
-                    this.position.x += this.velocity;
-                    this.position.y += this.velocity;
-                }
-                if (playerDistance.x < 0 && playerDistance.y < 0) {
-                    this.position.x += -this.velocity;
-                    this.position.y += -this.velocity;
-                }
-                if (playerDistance.x > 0 && playerDistance.y < 0) {
-                    this.position.x += this.velocity;
-                    this.position.y += -this.velocity;
-                }
-                if (playerDistance.x < 0 && playerDistance.y > 0) {
-                    this.position.x += -this.velocity;
-                    this.position.y += this.velocity;
-                }
-                this.draw();
-            }
-            else {
-                Endabgabe.animationKey = true;
-            }
+            let playerDistance = Endabgabe.Vector.getdistance(_positon, this.position);
+            let playerDiffernce = Endabgabe.Vector.getDifference(_positon, this.position);
+            let ratio = this.velocity / playerDistance;
+            playerDiffernce.scale(ratio);
+            this.position.add(playerDiffernce);
+            this.draw();
         }
     }
     Endabgabe.Player = Player;
